@@ -7,6 +7,7 @@ import { PaymentDetail, responseDetailPaymentEventType, responseType } from '@/t
 import { toast } from 'react-toastify';
 import { editTransaction, getDetailPaymentTransaction } from '@/services/transaction';
 import { formatNumber } from '@/helpers/formatNumber';
+import Qris from '../../public/qris.jpeg';
 
 export default function DetailPayment() {
 
@@ -150,7 +151,7 @@ export default function DetailPayment() {
             </Container>
             <Container className='my-3'>
                 <div className='text-center mb-3'>
-                    <img src='https://cms.dailysocial.id/wp-content/uploads/2023/03/QRIS.png' alt='qr-quarter' style={{ borderRadius: 12, width: 400, height: 400, objectFit: 'cover' }} className='img-fluid' />
+                    <Image src={Qris} alt='qr-quarter' style={{ borderRadius: 12, width: 800, height: 400, objectFit: 'contain' }} className='img-fluid' />
                 </div>
                 <h3>Form Pembelian Ticket</h3>
                 <div className='card-ticket'>
