@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Button, Col, Container, Form, Nav, Navbar, Row, Spinner } from 'react-bootstrap'
+import { Button, Col, Container, Form, Navbar, Row, Spinner } from 'react-bootstrap'
 import Logo from '../../public/logo.png'
 import { useCallback, useEffect, useState } from 'react';
 import { getDetailActiveEvent } from '@/services/event';
@@ -136,18 +136,6 @@ export default function DetailEvent() {
                         <Navbar.Brand href="/">
                             <Image src={Logo} alt='logo-quarter' width={120} />
                         </Navbar.Brand>
-                        {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse
-                            id="basic-navbar-nav"
-                            className="justify-content-between"
-                        >
-                            <Nav className='ms-auto'>
-                                <Nav.Link href="/" className='text-white'>Home</Nav.Link>
-                                <Nav.Link href="/#ticket" className='text-white'>Ticket</Nav.Link>
-                                <Nav.Link href="/" className='text-white'>Maps</Nav.Link>
-                                <Nav.Link href="/" className='text-white'>About</Nav.Link>
-                            </Nav>
-                        </Navbar.Collapse> */}
                     </Navbar>
                 </Container>
                 <Container fluid className='header-title' style={{

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Button, Card, Col, Container, Nav, Navbar, Row } from 'react-bootstrap'
+import { Button, Card, Col, Container, Navbar, Row } from 'react-bootstrap'
 import Logo from '../public/logo.png'
 import { useRouter } from 'next/router';
 import { getEvent } from '@/services/event';
@@ -17,18 +17,6 @@ export default function Home(props: HomeType) {
             <Navbar.Brand href="#home">
               <Image src={Logo} alt='logo-quarter' width={120} />
             </Navbar.Brand>
-            {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse
-              id="basic-navbar-nav"
-              className="justify-content-between"
-            >
-              <Nav className='ms-auto'>
-                <Nav.Link href="#home" className='text-white'>Home</Nav.Link>
-                <Nav.Link href="#link" className='text-white'>Ticket</Nav.Link>
-                <Nav.Link href="#link" className='text-white'>Maps</Nav.Link>
-                <Nav.Link href="#link" className='text-white'>About</Nav.Link>
-              </Nav>
-            </Navbar.Collapse> */}
           </Navbar>
         </Container>
         <Container className='header-title'>
@@ -39,7 +27,7 @@ export default function Home(props: HomeType) {
       <Container className='mb-3'>
         <h1>Get Ticket Here</h1>
         <div style={{ display: 'flex', overflowX: 'auto' }}>
-          {props.event.map((val, idx) => {
+          {props?.event?.map((val, idx) => {
             const startDate = moment(val.start_date || new Date()).valueOf();
             const endDate = moment(`${val.end_date.split('T')[0]}T23:59:00.000Z` || new Date()).valueOf();
             const date = moment().valueOf();
