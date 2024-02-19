@@ -43,7 +43,7 @@ export interface responseEventListType {
 export interface responseEventListAllType {
     success: boolean;
     message: string;
-    results: EventList[];
+    results: HomeList[];
 }
 
 export interface responseDetailEventType {

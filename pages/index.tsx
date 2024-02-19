@@ -1,14 +1,34 @@
 import Image from 'next/image';
-import { Button, Card, Col, Container, Navbar, Row } from 'react-bootstrap'
+import { Button, Card, Col, Container, Navbar, Row, Spinner } from 'react-bootstrap'
 import Logo from '../public/logo.png'
 import { useRouter } from 'next/router';
 import { getEvent } from '@/services/event';
-import { HomeType, responseEventListAllType } from '@/types/global.type';
+import { EventList, HomeList, HomeType, responseEventListAllType } from '@/types/global.type';
 import moment from 'moment';
 import { formatNumber } from '@/helpers/formatNumber';
+import { useEffect, useState } from 'react';
 
-export default function Home(props: HomeType) {
+export default function Home() {
   const router = useRouter()
+
+  const [loading, setLoading] = useState<boolean>(false)
+  const [data, setData] = useState<HomeList[]>([])
+
+  const getData = async () => {
+    try {
+      setLoading(true)
+      const response = await getEvent({ all: true }) as responseEventListAllType
+      setData(response.results)
+      setLoading(false)
+    } catch (err) {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   return (
     <>
       <Container fluid className='bg-header'>
@@ -27,7 +47,7 @@ export default function Home(props: HomeType) {
       <Container className='mb-3'>
         <h1>Get Ticket Here</h1>
         <div style={{ display: 'flex', overflowX: 'auto' }}>
-          {props?.event?.map((val, idx) => {
+          {loading ? <Spinner /> : data.map((val, idx) => {
             const startDate = moment(val.start_date || new Date()).valueOf();
             const endDate = moment(`${val.end_date.split('T')[0]}T23:59:00.000Z` || new Date()).valueOf();
             const date = moment().valueOf();
@@ -74,8 +94,3 @@ export default function Home(props: HomeType) {
     </>
   )
 }
-
-export const getServerSideProps = async () => {
-  const respons = await getEvent({ all: true }) as responseEventListAllType;
-  return { props: { event: respons?.results } };
-};
